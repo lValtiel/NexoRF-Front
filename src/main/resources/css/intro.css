@@ -1,0 +1,6 @@
+.contenedor {
+    -fx-background-color: #000000;
+}
+.contenedor .label {
+    -fx-text-fill: #ffffff;
+}

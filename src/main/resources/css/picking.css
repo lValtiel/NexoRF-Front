@@ -1,0 +1,9 @@
+.contenedor_picking {
+    -fx-background-color: #000000;
+}
+.usrLabel {
+    -fx-text-fill: #ffffff;
+}
+.cntrLabel {
+    -fx-text-fill: #ffffff;
+}

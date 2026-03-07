@@ -1,0 +1,68 @@
+.root {
+    -fx-background-color: #1c1f26;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-text-fill: #ffffff;
+}
+
+.contenedor {
+    -fx-background-color: #1E2029;
+    -fx-border-color: #343845;
+    -fx-border-radius: 7;
+}
+.titulo {
+    -fx-font-size: 50;
+    -fx-font-family: "Agency FB";
+    -fx-text-fill: #ffffff;
+}
+.labels {
+    -fx-font-size: 17;
+    -fx-font-family: Bahnschrift;
+    -fx-text-fill: #ffffff;
+}
+.btnLogin {
+    -fx-padding: 10;
+    -fx-cursor: hand;
+}
+.usernameField {
+    -fx-min-height: 30;
+    -fx-min-width: 200;
+}
+.passwordField {
+    -fx-min-height: 30;
+    -fx-min-width: 200;
+}
+.menu-lateral {
+    -fx-background-color: #2C3E50;
+}
+.btnVolver {
+    -fx-background-image: url("/icons/arrow.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-color: black;
+    -fx-cursor: hand;
+}
+
+.textfield {
+    -fx-background-color: #2a2d34;
+        -fx-text-fill: #e0e0e0;
+        -fx-font-size: 13px;
+        -fx-padding: 3 10;
+        -fx-background-radius: 5;
+        -fx-border-color: #3a3d44;
+        -fx-border-width: 1;
+}
+
+.button {
+    -fx-background-color: #2a2d34;
+    -fx-text-fill: #e0e0e0;
+    -fx-font-size: 13px;
+    -fx-padding: 8 15;
+    -fx-background-radius: 5;
+    -fx-border-color: #3a3d44;
+    -fx-border-width: 1;
+}
+
+.button:hover {
+    -fx-background-color: #3a3d44;
+    -fx-text-fill: #ffd700;
+}

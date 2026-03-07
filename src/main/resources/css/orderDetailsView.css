@@ -1,0 +1,83 @@
+.root {
+    -fx-background-color: #1c1f26;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-text-fill: #e0e0e0;
+}
+
+.scroll-pane {
+    -fx-background: #1c1f26;
+    -fx-background-color: #1c1f26;
+}
+
+.grid-pane {
+    -fx-background-color: #1c1f26;
+}
+
+.label {
+
+    -fx-background-color: #2a2d34;
+            -fx-text-fill: #e0e0e0;
+            -fx-font-size: 13px;
+            -fx-padding: 3 10;
+            -fx-background-radius: 5;
+            -fx-border-color: #3a3d44;
+            -fx-border-width: 1;
+
+            -fx-min-width: 200;   /* ancho mínimo */
+            -fx-pref-width: 200;  /* ancho preferido */
+
+}
+
+.detalles_de_pedido {
+    -fx-background-color: #2a2d34;
+            -fx-text-fill: #DAA520;
+            -fx-font-size: 18px;
+            -fx-padding: 3 10;
+            -fx-background-radius: 5;
+            -fx-border-color: #3a3d44;
+            -fx-border-width: 1;
+
+            -fx-min-width: 200;   /* ancho mínimo */
+            -fx-pref-width: 200;  /* ancho preferido */
+}
+
+.txtField {
+    -fx-background-color: #2a2d34;
+        -fx-text-fill: #e0e0e0;
+        -fx-font-size: 13px;
+        -fx-padding: 3 10;
+        -fx-background-radius: 5;
+        -fx-border-color: #3a3d44;
+        -fx-border-width: 1;
+}
+
+/* Botones */
+.button {
+    -fx-background-color: #2a2d34;
+    -fx-text-fill: #e0e0e0;
+    -fx-font-size: 13px;
+    -fx-padding: 8 15;
+    -fx-background-radius: 5;
+    -fx-border-color: #3a3d44;
+    -fx-border-width: 1;
+}
+
+.button:hover {
+    -fx-background-color: #3a3d44;
+    -fx-text-fill: #ffd700;
+}
+
+.titulo {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 25px;
+}
+
+.titulo-productos {
+    -fx-background-color: #2a3b4c;
+    -fx-font-size: 15px;
+}
+
+.titulo-orden {
+    -fx-background-color: #2a3b4c;
+    -fx-font-size: 15px;
+}

@@ -1,0 +1,205 @@
+/* Fondo general */
+.root {
+    -fx-background-color: #1c1f26;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-text-fill: #e0e0e0;
+}
+
+/* Barra superior */
+.hbox {
+    -fx-background-color: #1c1f26;
+    -fx-spacing: 10;
+    -fx-padding: 10;
+}
+
+/* Texto del ComboBox cuando está cerrado (el valor seleccionado) */
+.combo-box > .list-cell {
+    -fx-text-fill: white;
+}
+
+/* Fondo del botón del ComboBox */
+.combo-box-base {
+    -fx-background-color: #2a2d34;
+    -fx-text-fill: white;
+}
+
+.table-view .button.btn-eli {
+    -fx-background-color: #B22222;
+    -fx-text-fill: #FFFFFF;
+}
+
+.table-view .button.btn-eli:hover {
+    -fx-background-color: #DC143C;
+    -fx-text-fill: #FFD700;
+}
+
+.table-view .button.btn-edit {
+    -fx-background-color: #1E3A5F;
+    -fx-text-fill: #FFD700;
+}
+
+.table-view .button.btn-edit:hover {
+    -fx-background-color: #2C4A70;
+    -fx-text-fill: #FFD700;
+}
+
+/* Botones */
+.button {
+    -fx-background-color: #2a2d34;
+    -fx-text-fill: #e0e0e0;
+    -fx-font-size: 13px;
+    -fx-padding: 8 15;
+    -fx-background-radius: 5;
+    -fx-border-color: #3a3d44;
+    -fx-border-width: 1;
+}
+
+.button:hover {
+    -fx-background-color: #3a3d44;
+    -fx-text-fill: #ffd700;
+}
+
+/* ComboBox */
+.combo-box {
+    -fx-background-color: #2a2d34;
+    -fx-text-fill: #e0e0e0;
+    -fx-background-radius: 5;
+    -fx-border-color: #3a3d44;
+    -fx-border-width: 1;
+}
+
+/* Campo de texto */
+.text-field {
+    -fx-background-color: #2a2d34;
+    -fx-text-fill: #e0e0e0;
+    -fx-prompt-text-fill: #888;
+    -fx-background-radius: 5;
+    -fx-padding: 5 10;
+    -fx-border-color: #3a3d44;
+    -fx-border-width: 1;
+}
+
+/* Tabla */
+.table-view {
+    -fx-table-cell-border-color: #3a3d44;
+    -fx-background-color: #1c1f26;
+    -fx-border-color: #3a3d44;
+    -fx-border-width: 1;
+}
+
+/* Color de las líneas verticales entre columnas */
+.table-view .column-header,
+.table-view .filler {
+    -fx-border-color: #3a3d44;
+}
+
+
+/* Texto de los encabezados de columnas */
+.table-view .column-header .label {
+    -fx-text-fill: #ffffff;   /* blanco */
+    -fx-font-weight: bold;
+}
+
+/* Texto de las celdas */
+.table-view .cell {
+    -fx-padding: 4 0 4 0;
+    -fx-alignment: CENTER;
+    -fx-text-fill: #ffffff;   /* blanco */
+    -fx-font-size: 13px;
+}
+
+/* Texto de las filas seleccionadas */
+.table-row-cell:selected .cell {
+    -fx-text-fill: #ffd700;   /* dorado elegante al seleccionar */
+}
+
+
+.table-view .column-header-background {
+    -fx-background-color: #2a2d34;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 35px;
+    -fx-background-color: #2a2d34;
+    -fx-text-fill: #ffd700;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-background-color: #1c1f26;
+    -fx-text-fill: #ffffff;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #242830;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #3a3d44;
+    -fx-text-fill: #ffffff;
+}
+
+/* Botones dentro de la tabla */
+.table-view .button {
+    -fx-background-color: #2a2d34;
+    -fx-text-fill: #e0e0e0;
+    -fx-font-size: 12px;
+    -fx-padding: 5 10;
+    -fx-background-radius: 3;
+}
+
+.table-view .button:hover {
+    -fx-background-color: #3a3d44;
+    -fx-text-fill: #ffd700;
+}
+
+.top-bar-container {
+    -fx-border-color : #ffffff;
+    -fx-border-width: 0.5;
+    -fx-background-color: #0A0C0D;
+}
+
+.btn-top-bar1 {
+    -fx-background-color: #2E3238;
+}
+
+.btn-top-bar1:hover {
+    -fx-background-color: #4A4F57;
+}
+
+.btn-top-bar1_btnsesion {
+    -fx-background-color: #B22222;
+}
+
+.btn-top-bar1_btnsesion:hover {
+    -fx-background-color: #DC143C;
+    -fx-text-fill: #FFD700;
+}
+
+.btn-edit {
+    -fx-background-color: #1E3A5F;
+    -fx-text-fill: #FFD700;
+}
+
+.btn-eli{
+    -fx-background-color: #B22222;
+    -fx-text-fill: #FFD700;
+}
+
+.titulo-topbar {
+    -fx-text-fill: #DAA520;       /* dorado elegante */
+    -fx-font-size: 20px;          /* tamaño más grande */
+    -fx-font-weight: bold;        /* negrita */
+    -fx-font-family: "Segoe UI";  /* tipografía limpia */
+}
+
+.titulo-lista {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #DAA520;
+    -fx-padding: 0 0 15 0; /* espacio debajo */
+}
+
+.btnEliminar {
+    -fx-background-color: red;
+}
