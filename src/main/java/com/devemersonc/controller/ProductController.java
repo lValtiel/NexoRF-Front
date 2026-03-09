@@ -2,6 +2,7 @@ package com.devemersonc.controller;
 
 import com.devemersonc.model.CreateUpdateProductDTO;
 import com.devemersonc.model.ProductResponseDTO;
+import com.devemersonc.model.ValidationErrorProductDTO;
 import com.devemersonc.service.ProductService;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class ProductController {
         productService.updateProduct(product_id, createUpdateProductDTO);
     }
 
-    public void createProduct(CreateUpdateProductDTO createUpdateProductDTO) throws Exception{
-        productService.createProduct(createUpdateProductDTO);
+    public ValidationErrorProductDTO createProduct(CreateUpdateProductDTO createUpdateProductDTO) throws Exception{
+        return productService.createProduct(createUpdateProductDTO);
     }
 }

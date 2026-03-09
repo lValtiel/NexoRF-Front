@@ -3,6 +3,7 @@ package com.devemersonc.service;
 import com.devemersonc.model.CreateUpdateProductDTO;
 import com.devemersonc.model.ProductResponseDTO;
 import com.devemersonc.model.SessionManager;
+import com.devemersonc.model.ValidationErrorProductDTO;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -58,13 +59,19 @@ public class ProductService {
     }
 
     //crear nuevo producto
-    public void createProduct(CreateUpdateProductDTO createUpdateProductDTO) throws Exception{
+    public ValidationErrorProductDTO createProduct(CreateUpdateProductDTO createUpdateProductDTO) throws Exception{
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL))
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + SessionManager.getToken())
                 .POST(HttpRequest.BodyPublishers.ofString(gson.toJson(createUpdateProductDTO)))
                 .build();
-        client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        if(response.statusCode() == 400) {
+            return gson.fromJson(response.body(), ValidationErrorProductDTO.class);
+        }
+
+        return null;
     }
 }

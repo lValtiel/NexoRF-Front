@@ -3,6 +3,7 @@ package com.devemersonc.view.user;
 import com.devemersonc.controller.NavigationController;
 import com.devemersonc.controller.UserController;
 import com.devemersonc.model.UserResponseDTO;
+import com.devemersonc.utils.AlertUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -14,6 +15,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 public class ListUser {
     private final UserController userController = new UserController();
@@ -74,7 +77,32 @@ public class ListUser {
 
                 btnEliminar.setOnAction(e -> {
                     UserResponseDTO selected = getTableView().getItems().get(getIndex());
-                    System.out.println(selected.getUsername() + "eliminar");
+
+                    if(selected == null){
+                        return;
+                    }
+
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Confirmación");
+                    alert.setHeaderText("Eliminar usuario");
+                    alert.setContentText("¿Seguro que desea eliminar a este usuario?");
+
+                    Optional<ButtonType> result = alert.showAndWait();
+
+                    if(result.isPresent() && result.get() == ButtonType.OK) {
+                        try {
+                            userController.deleteUser(selected.getId());
+                            tablaUsers.getItems().remove(selected);
+                        }catch (Exception exception) {
+                            exception.printStackTrace();
+
+                            Alert error = new Alert(Alert.AlertType.ERROR);
+                            error.setTitle("Error");
+                            error.setHeaderText("No se pudo eliminar el usuario");
+                            error.setContentText(exception.getMessage());
+                            error.showAndWait();
+                        }
+                    }
                 });
             }
 

@@ -21,4 +21,8 @@ public class UserController {
     public void updateUser(Long user_id, CreateUser userUpdateDTO) throws Exception{
         userService.updateUser(user_id, userUpdateDTO);
     }
+
+    public void deleteUser(Long user_id) throws Exception{
+        userService.deleteUser(user_id);
+    }
 }

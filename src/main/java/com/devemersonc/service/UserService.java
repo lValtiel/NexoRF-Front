@@ -51,4 +51,14 @@ public class UserService {
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
     }
+
+    //Eliminar usuario
+    public void deleteUser(Long user_id) throws Exception{
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/" + user_id))
+                .header("Authorization", "Bearer " + SessionManager.getToken())
+                .DELETE()
+                .build();
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+    }
 }
