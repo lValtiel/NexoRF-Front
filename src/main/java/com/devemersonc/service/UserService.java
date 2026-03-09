@@ -1,9 +1,6 @@
 package com.devemersonc.service;
 
-import com.devemersonc.model.CreateUser;
-import com.devemersonc.model.RegisterUserRequest;
-import com.devemersonc.model.SessionManager;
-import com.devemersonc.model.UserResponseDTO;
+import com.devemersonc.model.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -12,6 +9,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
+import java.util.Map;
 
 public class UserService {
     private static final String BASE_URL = "http://localhost:8080/api/users";
@@ -19,14 +17,19 @@ public class UserService {
     private final Gson gson = new Gson();
 
     //Crear nuevo usuario
-    public void createUser(RegisterUserRequest registerUserRequest) throws Exception {
+    public Map<String, String> createUser(RegisterUserRequest registerUserRequest) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL))
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + SessionManager.getToken())
                 .POST(HttpRequest.BodyPublishers.ofString(gson.toJson(registerUserRequest)))
                 .build();
-        httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+        if(response.statusCode() == 400) {
+            return gson.fromJson(response.body(), new TypeToken<Map<String, String>>(){}.getType());
+        }
+        return null;
     }
 
     //Obtener lista de usuarios

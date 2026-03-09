@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 public class UpdateProductView {
 
     public void showUpdateModal(Producto producto, TableView<Producto> tabla) {
-        Stage modal = new Stage();
+        /*Stage modal = new Stage();
         modal.setTitle("Actualizar producto");
         modal.initModality(Modality.APPLICATION_MODAL);
 
@@ -53,6 +53,6 @@ public class UpdateProductView {
 
         Scene scene = new Scene(layout, 400, 300) ;
         modal.setScene(scene);
-        modal.showAndWait();
+        modal.showAndWait();*/
     }
 }

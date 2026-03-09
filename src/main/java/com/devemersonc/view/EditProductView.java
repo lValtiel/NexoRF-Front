@@ -41,9 +41,13 @@ public class EditProductView {
         gridPane.setHgap(10);
 
         TextField txtName = new TextField(createUpdateProductDTO.getName());
+        txtName.getStyleClass().add("textfield");
         TextField txtSku = new TextField(createUpdateProductDTO.getSku());
+        txtSku.getStyleClass().add("textfield");
         TextField txtAmount = new TextField(createUpdateProductDTO.getAmount().toString());
+        txtAmount.getStyleClass().add("textfield");
         TextField txtLocation = new TextField(createUpdateProductDTO.getLocation());
+        txtLocation.getStyleClass().add("textfield");
         Button btnSave = new Button("Guardar cambios");
         GridPane.setHalignment(btnSave, HPos.RIGHT);
 
@@ -82,6 +86,7 @@ public class EditProductView {
         });
 
         Scene scene = new Scene(gridPane, 400, 600);
+        scene.getStylesheets().add(getClass().getResource("/css/formEditProduct.css").toExternalForm());
 
         modal.setScene(scene);
         modal.showAndWait();
