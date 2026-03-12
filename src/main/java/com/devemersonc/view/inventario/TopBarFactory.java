@@ -2,7 +2,7 @@ package com.devemersonc.view.inventario;
 
 import com.devemersonc.controller.NavigationController;
 import com.devemersonc.view.OrdersView;
-import com.devemersonc.view.PickingView;
+import com.devemersonc.view.picking.PickingView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

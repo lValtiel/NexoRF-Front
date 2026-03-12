@@ -28,9 +28,11 @@ public class IntroIDEquipoView {
 
         Button btnSiguiente = new Button("Siguiente");
         btnSiguiente.setOnAction(e -> {
-            SelecAlmacen selecAlmacen = new SelecAlmacen();
-            Scene currentScene = btnSiguiente.getScene();
-            currentScene.setRoot(selecAlmacen.getSelecAlmacen());
+            if(idEquipoField.getText().equals("TM")) {
+                SelecAlmacen selecAlmacen = new SelecAlmacen();
+                Scene currentScene = btnSiguiente.getScene();
+                currentScene.setRoot(selecAlmacen.getSelecAlmacen());
+            }
         });
 
         gridPane.add(idEquipoLabel, 0, 0);

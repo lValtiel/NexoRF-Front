@@ -23,7 +23,6 @@ public class TareaSiguiente {
         Label presEnter = new Label("PRESIONE ENTER");
 
         Label opcion_0 = new Label("0. Comenzar pedido");
-        Label opcion_1 = new Label("1. Consulta última tarea");
         Label opcion_2 = new Label("2. Cerrar pedido.");
         TextField entrada = new TextField();
         entrada.getStyleClass().add("entrada");
@@ -33,10 +32,9 @@ public class TareaSiguiente {
         Button btnVolver = new Button("Volver");
 
         btnVolver.setOnAction(e -> {
-            InfoTareaAsignada infoTareaAsignada = new InfoTareaAsignada();
+            TareaDePreparacion tareaDePreparacion = new TareaDePreparacion();
             Scene currentScene = btnVolver.getScene();
-            currentScene.getStylesheets().add(getClass().getResource("/css/comienzoPedido.css/").toExternalForm());
-            currentScene.setRoot(infoTareaAsignada.getInfoTarea());
+            currentScene.setRoot(tareaDePreparacion.getSceneTareaPrep());
         });
 
         btnEntrar.setOnAction(e -> {
@@ -65,11 +63,10 @@ public class TareaSiguiente {
         gridPane.add(sigTarea,0, 1);
         gridPane.add(presEnter, 0, 2);
         gridPane.add(opcion_0, 0, 3);
-        gridPane.add(opcion_1, 0, 4);
-        gridPane.add(opcion_2, 0, 5);
-        gridPane.add(entrada, 0 ,6);
-        gridPane.add(btnEntrar, 0, 7);
-        gridPane.add(btnVolver, 0, 7);
+        gridPane.add(opcion_2, 0, 4);
+        gridPane.add(entrada, 0 ,5);
+        gridPane.add(btnEntrar, 0, 6);
+        gridPane.add(btnVolver, 0, 6);
 
         return gridPane;
     }

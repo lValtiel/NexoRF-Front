@@ -46,8 +46,6 @@ public class SelecAlmacen {
                     MenuPrincipalPicking menuPrincipalPicking = new MenuPrincipalPicking();
                     Scene currentScene = btnSiguiente.getScene();
                     currentScene.setRoot(menuPrincipalPicking.getSceneMenu());
-                }else {
-                    System.out.println("Solo recibe 0");
                 }
             }catch (NumberFormatException ex) {
 

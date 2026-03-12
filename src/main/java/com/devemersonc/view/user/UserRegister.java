@@ -26,7 +26,7 @@ public class UserRegister {
         modal.initModality(Modality.APPLICATION_MODAL);
 
         ComboBox<String> roles = new ComboBox<>();
-        roles.getItems().addAll("ADMIN", "PICKER");
+        roles.getItems().addAll("ADMIN");
         roles.setValue("ADMIN");
 
         GridPane gridPane = new GridPane();
@@ -129,10 +129,6 @@ public class UserRegister {
 
                 if(roleName.equals("ADMIN")) {
                     roleName = "ROLE_ADMIN";
-                }
-
-                if(roleName.equals("PICKER")) {
-                    roleName = "ROLE_PICKER";
                 }
 
                 RoleRequest roleRequest = new RoleRequest(roleName);

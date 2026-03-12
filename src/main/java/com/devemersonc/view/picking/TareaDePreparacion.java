@@ -21,28 +21,35 @@ public class TareaDePreparacion {
         gridPane.getStyleClass().add("contenedor");
 
         Label titulo = new Label("TAREA DE PREPARACION");
-        Label numTareas = new Label("N° Tar: 1");
+        Label tituloNumOrder = new Label("N° de orden:");
+        tituloNumOrder.getStyleClass().add("titulos");
+        Label numOrder = new Label("ORD-001");
+        numOrder.setPrefWidth(140);
+        numOrder.setPadding(new Insets(0,0,0,5));
+        numOrder.getStyleClass().add("tabla");
+
+        Label tituloNumTareas = new Label("N° de tareas:");
+        tituloNumTareas.getStyleClass().add("titulos");
+        Label numTareas = new Label("4");
         numTareas.setPrefWidth(140);
+        numTareas.setPadding(new Insets(0,5,0,5));
         numTareas.getStyleClass().add("tabla");
-        Label kilos = new Label("kilos: 102.6 kg");
-        kilos.setPrefWidth(140);
-        kilos.getStyleClass().add("tabla");
-        Label vol = new Label("VOL: .25 M3");
-        vol.setPrefWidth(140);
-        vol.getStyleClass().add("tabla");
+
+        Label tituloEstado = new Label("Estado:");
+        tituloEstado.getStyleClass().add("titulos");
+        Label estado = new Label("Pendiente");
+        estado.setPrefWidth(140);
+        estado.setPadding(new Insets(0,5,0,5));
+        estado.getStyleClass().add("tabla");
 
         Button btnEntrar = new Button("Entrar");
         GridPane.setHalignment(btnEntrar, HPos.RIGHT);
         Button btnSalir = new Button("Volver");
 
         btnEntrar.setOnAction(e -> {
-            InfoTareaAsignada info = new InfoTareaAsignada();
+            TareaSiguiente tareaSiguiente = new TareaSiguiente();
             Scene currentScene = btnEntrar.getScene();
-            currentScene.setRoot(info.getInfoTarea());
-
-            /*TareaSiguiente tareaSiguiente = new TareaSiguiente();
-            Scene currentScene = btnEntrar.getScene();
-            currentScene.setRoot(tareaSiguiente.getSceneTareaSiguiente());*/
+            currentScene.setRoot(tareaSiguiente.getSceneTareaSiguiente());
         });
 
         btnSalir.setOnAction(e -> {
@@ -51,13 +58,15 @@ public class TareaDePreparacion {
             currentScene.setRoot(menuPrincipalPicking.getSceneMenu());
         });
 
-        gridPane.add(titulo,
-                0, 0);
-        gridPane.add(numTareas, 0, 1);
-        gridPane.add(kilos, 0, 2);
-        gridPane.add(vol, 0, 3);
-        gridPane.add(btnEntrar, 0, 4);
-        gridPane.add(btnSalir, 0, 4);
+        gridPane.add(titulo, 0, 0);
+        gridPane.add(tituloNumOrder, 0, 1);
+        gridPane.add(numOrder, 0, 2);
+        gridPane.add(tituloNumTareas, 0, 3);
+        gridPane.add(numTareas, 0, 4);
+        gridPane.add(tituloEstado, 0, 5);
+        gridPane.add(estado, 0, 6);
+        gridPane.add(btnEntrar, 0, 7);
+        gridPane.add(btnSalir, 0, 7);
 
         return gridPane;
     }

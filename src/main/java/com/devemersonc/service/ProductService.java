@@ -31,7 +31,7 @@ public class ProductService {
     }
 
     //Actualizar producto
-    public void updateProduct(Long product_id, CreateUpdateProductDTO createUpdateProductDTO) throws Exception{
+    public ValidationErrorProductDTO updateProduct(Long product_id, CreateUpdateProductDTO createUpdateProductDTO) throws Exception{
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + "/" + product_id))
                 .header("Content-Type", "application/json")
@@ -40,6 +40,27 @@ public class ProductService {
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        if(response.statusCode() == 400) {
+            return gson.fromJson(response.body(), ValidationErrorProductDTO.class);
+        }
+        return null;
+    }
+
+    //crear nuevo producto
+    public ValidationErrorProductDTO createProduct(CreateUpdateProductDTO createUpdateProductDTO) throws Exception{
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL))
+                .header("Content-Type", "application/json")
+                .header("Authorization", "Bearer " + SessionManager.getToken())
+                .POST(HttpRequest.BodyPublishers.ofString(gson.toJson(createUpdateProductDTO)))
+                .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        if(response.statusCode() == 400) {
+            return gson.fromJson(response.body(), ValidationErrorProductDTO.class);
+        }
+        return null;
     }
 
     //Metodo search producto por sku
@@ -56,22 +77,5 @@ public class ProductService {
             return null;
         }
         return gson.fromJson(response.body(), ProductResponseDTO.class);
-    }
-
-    //crear nuevo producto
-    public ValidationErrorProductDTO createProduct(CreateUpdateProductDTO createUpdateProductDTO) throws Exception{
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL))
-                .header("Content-Type", "application/json")
-                .header("Authorization", "Bearer " + SessionManager.getToken())
-                .POST(HttpRequest.BodyPublishers.ofString(gson.toJson(createUpdateProductDTO)))
-                .build();
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        if(response.statusCode() == 400) {
-            return gson.fromJson(response.body(), ValidationErrorProductDTO.class);
-        }
-
-        return null;
     }
 }

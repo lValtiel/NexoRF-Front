@@ -56,7 +56,7 @@ public class LoginView {
                 errorLabel.setVisible(false);
                 NavigationController.getInstance().showInventario();
             }else {
-                errorLabel.setText("Nombre de usuario o contraseña incorrecta.");
+                errorLabel.setText("Nombre de usuario o contraseña incorrecta");
                 errorLabel.setVisible(true);
             }
         });

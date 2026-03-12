@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class MenuPrincipalPicking {
 
@@ -21,8 +22,6 @@ public class MenuPrincipalPicking {
 
         Label titulo = new Label("Menú princ.");
         Label opcion_0 = new Label("0 Admin tareas");
-        Label opcion_1 = new Label("1 Empaque");
-        Label opcion_2 = new Label("2 Consulta Stock");
         Label opcion_3 = new Label("4 Cerrar Sesión");
 
         TextField entradaNum = new TextField();
@@ -31,17 +30,29 @@ public class MenuPrincipalPicking {
 
         gridPane.add(titulo, 0, 0);
         gridPane.add(opcion_0, 0, 1);
-        gridPane.add(opcion_1, 0, 2);
-        gridPane.add(opcion_2, 0, 3);
-        gridPane.add(opcion_3, 0, 4);
-        gridPane.add(entradaNum, 0, 5);
-        gridPane.add(btnSiguiente, 0, 6);
+        gridPane.add(opcion_3, 0, 2);
+        gridPane.add(entradaNum, 0, 3);
+        gridPane.add(btnSiguiente, 0, 4);
+
 
         btnSiguiente.setOnAction(e -> {
-            TareaDePreparacion tareaDePreparacion = new TareaDePreparacion();
-            Scene scene = btnSiguiente.getScene();
-            scene.getStylesheets().add(getClass().getResource("/css/tareaPreparacion.css").toExternalForm());
-            scene.setRoot(tareaDePreparacion.getSceneTareaPrep());
+            String text = entradaNum.getText();
+            try {
+                int numIntField = Integer.parseInt(text);
+                if(numIntField == 0) {
+                    TareaDePreparacion tareaDePreparacion = new TareaDePreparacion();
+                    Scene scene = btnSiguiente.getScene();
+                    scene.getStylesheets().add(getClass().getResource("/css/tareaPreparacion.css").toExternalForm());
+                    scene.setRoot(tareaDePreparacion.getSceneTareaPrep());
+                }
+                if(numIntField == 4) {
+                    Stage stage = (Stage) btnSiguiente.getScene().getWindow();
+                    stage.close();
+                }
+            }catch (NumberFormatException exception) {
+
+            }
+
         });
 
         return gridPane;

@@ -18,8 +18,8 @@ public class ProductController {
         return productService.getProductBySku(data);
     }
 
-    public void updateProduct(Long product_id, CreateUpdateProductDTO createUpdateProductDTO) throws Exception{
-        productService.updateProduct(product_id, createUpdateProductDTO);
+    public ValidationErrorProductDTO updateProduct(Long product_id, CreateUpdateProductDTO createUpdateProductDTO) throws Exception{
+        return productService.updateProduct(product_id, createUpdateProductDTO);
     }
 
     public ValidationErrorProductDTO createProduct(CreateUpdateProductDTO createUpdateProductDTO) throws Exception{
