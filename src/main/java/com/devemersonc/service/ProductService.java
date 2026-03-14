@@ -1,9 +1,6 @@
 package com.devemersonc.service;
 
-import com.devemersonc.model.CreateUpdateProductDTO;
-import com.devemersonc.model.ProductResponseDTO;
-import com.devemersonc.model.SessionManager;
-import com.devemersonc.model.ValidationErrorProductDTO;
+import com.devemersonc.model.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -63,7 +60,7 @@ public class ProductService {
         return null;
     }
 
-    //Metodo search producto por sku
+    //Metodo search producto por sku/name/location
     public ProductResponseDTO getProductBySku(String data) throws Exception {
         String url = BASE_URL + "/search?data=" + data;
 
@@ -77,5 +74,38 @@ public class ProductService {
             return null;
         }
         return gson.fromJson(response.body(), ProductResponseDTO.class);
+    }
+
+    //Metodo buscar producto solo por nombre
+    public ProductResponseDTO getProductByName(String name) throws Exception{
+        String url = BASE_URL + "/findByName?name=" + name;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Authorization", "Bearer " + SessionManager.getToken())
+                .GET()
+                .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        if(response.statusCode() == 404) {
+            ErrorMessageDTO error = gson.fromJson(response.body(), ErrorMessageDTO.class);
+
+        }
+        return gson.fromJson(response.body(), ProductResponseDTO.class);
+    }
+
+    //Metodo modificar cantidad del producto en inventario
+    public String pickProduct(Long productId, int quantity) throws Exception{
+        PickDTO dto = new PickDTO(productId, quantity);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/pick"))
+                .header("Content-Type", "application/json")
+                .header("Authorization", "Bearer " + SessionManager.getToken())
+                .POST(HttpRequest.BodyPublishers.ofString(gson.toJson(dto)))
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return response.body();
     }
 }

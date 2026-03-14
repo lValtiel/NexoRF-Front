@@ -1,5 +1,6 @@
 package com.devemersonc.view.picking;
 
+import com.devemersonc.model.SessionManager;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -8,10 +9,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import com.devemersonc.model.OrderResponseDTO;
 
 public class TareaSiguiente {
 
     public GridPane getSceneTareaSiguiente() {
+
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.TOP_LEFT);
         gridPane.setHgap(15);

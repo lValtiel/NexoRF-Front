@@ -1,6 +1,7 @@
 package com.devemersonc.controller;
 
 import com.devemersonc.model.CreateUpdateProductDTO;
+import com.devemersonc.model.PickDTO;
 import com.devemersonc.model.ProductResponseDTO;
 import com.devemersonc.model.ValidationErrorProductDTO;
 import com.devemersonc.service.ProductService;
@@ -24,5 +25,21 @@ public class ProductController {
 
     public ValidationErrorProductDTO createProduct(CreateUpdateProductDTO createUpdateProductDTO) throws Exception{
         return productService.createProduct(createUpdateProductDTO);
+    }
+
+    public ProductResponseDTO findByName(String name) {
+        try {
+            return productService.getProductByName(name);
+        }catch (Exception e) {
+            return null;
+        }
+    }
+
+    public String pickProduct(Long productId, int quantity) {
+        try {
+            return productService.pickProduct(productId, quantity);
+        }catch (Exception e) {
+            return null;
+        }
     }
 }

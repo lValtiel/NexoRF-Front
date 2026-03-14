@@ -52,4 +52,18 @@ public class AlertUtils {
         alert.setContentText("Usuario registrado con éxito");
         alert.showAndWait();
     }
+
+    public static void showInfo() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText("Pedido terminado");
+        alert.showAndWait();
+    }
+
+    public static void errorQuantity(String string) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setContentText(string);
+        alert.showAndWait();
+    }
 }
