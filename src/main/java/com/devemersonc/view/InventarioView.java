@@ -15,7 +15,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
 public class InventarioView {
-
     private final ProductController productController = new ProductController();
     private TableView<ProductResponseDTO> tablaProductos;
 
@@ -218,6 +217,25 @@ public class InventarioView {
             ));
 
             root.setCenter(tablaProductos); // ← Usamos la tabla ORIGINAL
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void refreshTable() {
+
+        if(tablaProductos == null){
+            return;
+        }
+
+        try {
+
+            tablaProductos.setItems(
+                    FXCollections.observableArrayList(
+                            productController.loadAllProducts()
+                    )
+            );
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -18,6 +18,8 @@ import com.devemersonc.model.OrderResponseDTO;
 import com.devemersonc.model.OrderLineResponseDTO;
 import com.devemersonc.controller.ProductController;
 import com.devemersonc.model.ProductResponseDTO;
+import com.devemersonc.view.InventarioView;
+import com.devemersonc.controller.NavigationController;
 
 import java.awt.*;
 import java.util.List;
@@ -131,6 +133,8 @@ public class ComienzoPedido {
 
                 if(cantidadIngresada == tareaActualLinea.getQuantity()) {
                     productController.pickProduct(tareaActualLinea.getProductId(), cantidadIngresada);
+                    NavigationController.getInstance().refreshInventarioTable();
+
                     tareaActual++;
 
                     if(tareaActual >= orderLines.size()) {

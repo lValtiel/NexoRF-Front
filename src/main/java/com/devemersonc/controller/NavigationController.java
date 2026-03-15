@@ -92,4 +92,11 @@ public class NavigationController {
     public void showOrderDetailsView(OrderResponseDTO orderResponseDTO) {
         new OrderDetailsView().getDetailsOrder(orderResponseDTO);
     }
+
+    public void refreshInventarioTable() {
+
+        if (inventarioView != null) {
+            inventarioView.refreshTable();
+        }
+    }
 }
