@@ -12,17 +12,19 @@ import com.devemersonc.view.picking.MenuPrincipalPicking;
 import com.devemersonc.view.user.EditUserView;
 import com.devemersonc.view.user.ListUser;
 import com.devemersonc.view.user.UserRegister;
+import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import com.devemersonc.service.OrderService;
 
 public class NavigationController {
 
     private static NavigationController instance;
     private Stage stage;
 
-    // Guardamos la vista Inventario solo una vez
     private InventarioView inventarioView;
+    private OrdersView ordersView;
 
     public static NavigationController getInstance() {
         if (instance == null) instance = new NavigationController(){};
@@ -98,5 +100,28 @@ public class NavigationController {
         if (inventarioView != null) {
             inventarioView.refreshTable();
         }
+    }
+
+    public void refreshOrderTable() {
+
+        Platform.runLater(() -> {
+
+            if (ordersView != null) {
+
+                ordersView.refreshTable();
+
+                setContent(ordersView.getView());
+
+            }
+        });
+    }
+    public void showOrders() {
+
+        if (ordersView == null) {
+            ordersView = new OrdersView();
+        }
+
+        ordersView.refreshTable();
+        setContent(ordersView.getView());
     }
 }

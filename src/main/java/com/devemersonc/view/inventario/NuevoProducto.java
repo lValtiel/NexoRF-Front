@@ -27,7 +27,7 @@ public class NuevoProducto {
 
     public void showFormNuevoProducto() {
         Stage modal = new Stage();
-        modal.setTitle("Nuevo producto");
+        modal.setTitle("Nuevo Producto");
         modal.initModality(Modality.APPLICATION_MODAL);
 
         GridPane gridPane = new GridPane();

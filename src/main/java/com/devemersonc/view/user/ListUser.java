@@ -90,7 +90,7 @@ public class ListUser {
                 btnEditar.setOnAction(e -> {
                     UserResponseDTO selected = getTableView().getItems().get(getIndex());
 
-                    EditUserView editUserView = new EditUserView(selected, tablaUsers);
+                    EditUserView editUserView = new EditUserView(selected, tablaUsers, modal);
                     Scene root = new Scene(editUserView.formEditUser(), 800, 600);
                     root.getStylesheets().add(getClass().getResource("/css/formEditUser.css").toExternalForm());
                     modal.setScene(root);
@@ -162,6 +162,6 @@ public class ListUser {
         Scene scene = new Scene(root, 800, 600);
         modal.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("/css/listUser.css").toExternalForm());
-        modal.showAndWait();
+        modal.show();
     }
 }

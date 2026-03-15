@@ -8,6 +8,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import com.devemersonc.utils.AlertUtils;
+
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -18,6 +26,32 @@ public class Main extends Application {
         NavigationController.getInstance().showLogin();
 
         stage.show();
+
+        if(!testApiConnection()) {
+            AlertUtils.apiConnectionError();
+        }
+    }
+
+    public static boolean testApiConnection() {
+        try {
+
+            HttpClient client = HttpClient.newHttpClient();
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("http://localhost:8080/api/users"))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response =
+                    client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            // 200 = OK
+            // 401 = requiere login pero el servidor está vivo
+            return response.statusCode() == 200 || response.statusCode() == 401;
+
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public static void main(String[] args) {

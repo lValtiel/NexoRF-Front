@@ -11,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import com.devemersonc.utils.AlertUtils;
 
 public class TopBarFactory {
 
@@ -28,13 +29,20 @@ public class TopBarFactory {
             new PickingView().showViewPicking();
         });
 
+        btnCerrarSesion.setOnAction(e -> {
+            if(AlertUtils.confirmLogout()) {
+                NavigationController.getInstance().showLogin();
+            }
+        });
+
         btnOrdenes.setOnAction(e -> {
-            NavigationController.getInstance().setContent(
-                    new OrdersView().getView()
-            );
+
+            NavigationController.getInstance().showOrders();
 
             NavigationController.getInstance().setTop(
-                    TopBarFactory.createTopBarWithBack(() -> NavigationController.getInstance().showInventario())
+                    TopBarFactory.createTopBarWithBack(
+                            () -> NavigationController.getInstance().showInventario()
+                    )
             );
         });
 

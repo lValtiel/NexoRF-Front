@@ -53,11 +53,13 @@ public class AlertUtils {
         alert.showAndWait();
     }
 
-    public static void showInfo() {
+    public static boolean showInfo() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
         alert.setContentText("Pedido terminado");
-        alert.showAndWait();
+
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == ButtonType.OK;
     }
 
     public static void errorQuantity(String string) {
@@ -65,5 +67,36 @@ public class AlertUtils {
         alert.setHeaderText(null);
         alert.setContentText(string);
         alert.showAndWait();
+    }
+
+    public static void error() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setContentText("Ocurrió un error inesperado.");
+        alert.showAndWait();
+    }
+
+    public static boolean confirmLogout() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Cerrar Sesión");
+        alert.setHeaderText("¿Seguro que desea cerrar sesión?");
+        alert.setContentText("Se cerrará la sesión actual.");
+
+        ButtonType btnSi = new ButtonType("Si");
+        ButtonType btnNo = new ButtonType("No");
+
+        alert.getButtonTypes().setAll(btnSi, btnNo);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        return result.isPresent() && result.get() == btnSi;
+    }
+
+    public static void apiConnectionError() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error de conexión");
+        alert.setHeaderText("No se pudo conectar al servidor");
+        alert.setContentText("Verifique que el backend esté ejecutándose.");
+        alert.show();
     }
 }

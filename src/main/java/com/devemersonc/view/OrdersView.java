@@ -3,6 +3,7 @@ package com.devemersonc.view;
 import com.devemersonc.controller.NavigationController;
 import com.devemersonc.model.OrderResponseDTO;
 import com.devemersonc.service.OrderService;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,13 +19,12 @@ public class OrdersView {
     private final OrderService orderService = new OrderService();
     private final DateTimeFormatter formatter =
             DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    private TableView<OrderResponseDTO> table = new TableView<>();
+    private BorderPane layout = new BorderPane();
 
-    public BorderPane getView() {
-
-        BorderPane layout = new BorderPane();
-
-        TableView<OrderResponseDTO> table = new TableView<>();
+    public OrdersView() {
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+        table.getColumns().clear();
 
         TableColumn<OrderResponseDTO, String> colNum = new TableColumn<>("Número");
         colNum.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getNumOrder()));
@@ -36,7 +36,10 @@ public class OrdersView {
                 ));
 
         TableColumn<OrderResponseDTO, String> colEstado = new TableColumn<>("Estado");
-        colEstado.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getState()));
+        //colEstado.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getState()));
+        colEstado.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getState())
+        );
 
         colEstado.setCellFactory(tc -> new TableCell<>() {
             @Override
@@ -99,15 +102,27 @@ public class OrdersView {
 
         table.getColumns().addAll(colNum, colFecha, colEstado, colAccion);
 
+        layout.setCenter(table);
+        refreshTable();
+    }
+
+    public BorderPane getView() {
+        return layout;
+    }
+
+    public void refreshTable() {
         try {
+
             List<OrderResponseDTO> orders = orderService.getOrders();
-            ObservableList<OrderResponseDTO> data = FXCollections.observableArrayList(orders);
-            table.setItems(data);
+
+            table.setItems(
+                    FXCollections.observableArrayList(orders)
+            );
+
+            table.refresh();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        layout.setCenter(table);
-        return layout;
     }
 }

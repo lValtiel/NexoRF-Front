@@ -3,6 +3,8 @@ package com.devemersonc.view.picking;
 import com.devemersonc.controller.OrderController;
 import com.devemersonc.model.SessionManager;
 import com.devemersonc.utils.AlertUtils;
+import com.devemersonc.view.OrdersView;
+import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,8 +22,6 @@ import com.devemersonc.controller.ProductController;
 import com.devemersonc.model.ProductResponseDTO;
 import com.devemersonc.view.InventarioView;
 import com.devemersonc.controller.NavigationController;
-
-import java.awt.*;
 import java.util.List;
 
 public class ComienzoPedido {
@@ -138,8 +138,21 @@ public class ComienzoPedido {
                     tareaActual++;
 
                     if(tareaActual >= orderLines.size()) {
-                        AlertUtils.showInfo();
-                        btnSiguiente.setDisable(true);
+
+                        if(AlertUtils.showInfo()) {
+
+                            orderController.updateStateOrder(
+                                    currentOrder.getOrder_id(),
+                                    "Completado"
+                            );
+
+                            NavigationController.getInstance().refreshOrderTable();
+
+                            SessionManager.setCurrentOrder(null);
+
+                            MenuPrincipalPicking menu = new MenuPrincipalPicking();
+                            btnSiguiente.getScene().setRoot(menu.getSceneMenu());
+                        }
                         return;
                     }
 
@@ -154,8 +167,8 @@ public class ComienzoPedido {
                 }else {
                     AlertUtils.errorQuantity("Cantidad incorrecta");
                 }
-            }catch (NumberFormatException exception) {
-                AlertUtils.errorQuantity("Cantidad inválida");
+            }catch (Exception exception) {
+                AlertUtils.error();
             }
         });
 

@@ -22,7 +22,7 @@ public class UserRegister {
 
     public void getViewFormRegisterUser() {
         Stage modal = new Stage();
-        modal.setTitle("Registrar nuevo usuario");
+        modal.setTitle("Registrar Usuario");
         modal.initModality(Modality.APPLICATION_MODAL);
 
         ComboBox<String> roles = new ComboBox<>();

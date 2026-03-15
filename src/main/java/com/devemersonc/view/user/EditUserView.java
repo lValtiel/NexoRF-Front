@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.util.Map;
 
@@ -22,10 +23,12 @@ public class EditUserView {
     private final UserResponseDTO userSelected;
     private final TableView<UserResponseDTO> tablaUsers;
     private final UserController userController = new UserController();
+    private final Stage modal;
 
-    public EditUserView(UserResponseDTO userSelected, TableView<UserResponseDTO> tablaUsers) {
+    public EditUserView(UserResponseDTO userSelected, TableView<UserResponseDTO> tablaUsers, Stage modal) {
         this.userSelected = userSelected;
         this.tablaUsers = tablaUsers;
+        this.modal = modal;
     }
 
     public VBox formEditUser() {
@@ -45,7 +48,6 @@ public class EditUserView {
         emailTxt.getStyleClass().add("textfield");
         TextField rutTxt = new TextField(userSelected.getRut());
         rutTxt.getStyleClass().add("textfield");
-        Button btnVolver = new Button("Volver");
         Button btnGuardar = new Button("Guardar");
         GridPane.setHalignment(btnGuardar, HPos.RIGHT);
 
@@ -89,15 +91,10 @@ public class EditUserView {
         gridPane.add(rutTxt, 1, 8);
         gridPane.add(errorRut, 1,9);
 
-        gridPane.add(btnVolver, 0, 10);
         gridPane.add(btnGuardar, 1, 10);
 
         Label titutlo = new Label("Actualizar usuario");
         titutlo.getStyleClass().add("titulo");
-
-        btnVolver.setOnAction(e -> {
-            NavigationController.getInstance().showListUsers();
-        });
 
         btnGuardar.setOnAction(e -> {
             try {
@@ -147,12 +144,17 @@ public class EditUserView {
                 );
 
                 tablaUsers.refresh();
-                NavigationController.getInstance().showListUsers();
+
+                modal.close();
+
+                ListUser listUser = new ListUser();
+                listUser.listUsers();
             }catch (Exception exception) {
                 exception.printStackTrace();
             }
         });
 
+        modal.setTitle("Actualizar Usuario");
         VBox root = new VBox(15);
         root.setAlignment(Pos.TOP_CENTER);
         root.setPadding(new Insets(80, 0,0,0));

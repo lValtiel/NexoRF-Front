@@ -15,4 +15,12 @@ public class OrderController {
             return List.of();
         }
     }
+
+    public String updateStateOrder(Long orderId, String state) {
+        try {
+            return orderservice.updateStateOrder(orderId, state);
+        }catch (Exception e) {
+            return null;
+        }
+    }
 }

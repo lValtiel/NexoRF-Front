@@ -2,6 +2,7 @@ package com.devemersonc.service;
 
 import com.devemersonc.model.CreateOrderDTO;
 import com.devemersonc.model.OrderResponseDTO;
+import com.devemersonc.model.OrderStateDTO;
 import com.devemersonc.model.SessionManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -43,5 +44,18 @@ public class OrderService {
                 .POST(HttpRequest.BodyPublishers.ofString(gson.toJson(createOrderDTO)))
                 .build();
         client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
+    public String updateStateOrder(Long orderId, String state) throws Exception {
+        OrderStateDTO dto = new OrderStateDTO(orderId, state);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/update-state"))
+                .header("Content-Type", "application/json")
+                .header("Authorization", "Bearer " + SessionManager.getToken())
+                .POST(HttpRequest.BodyPublishers.ofString(gson.toJson(dto)))
+                .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return response.body();
     }
 }

@@ -57,7 +57,7 @@ public class InventarioView {
 
         // ComboBox filtro
         ComboBox<String> filtro = new ComboBox<>();
-        filtro.getItems().addAll("Todos los productos", "Código", "Nombre", "Ubicación");
+        filtro.getItems().addAll("Todos los productos", "Código", "Nombre");
         filtro.setValue("Todos los productos");
 
         Label tituloLista = new Label("Lista Productos");

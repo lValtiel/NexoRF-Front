@@ -26,7 +26,6 @@ public class TareaSiguiente {
         Label presEnter = new Label("PRESIONE ENTER");
 
         Label opcion_0 = new Label("0. Comenzar pedido");
-        Label opcion_2 = new Label("2. Cerrar pedido.");
         TextField entrada = new TextField();
         entrada.getStyleClass().add("entrada");
         entrada.setPrefWidth(140);
@@ -51,12 +50,6 @@ public class TareaSiguiente {
                         Scene currentScene = btnEntrar.getScene();
                         currentScene.setRoot(comienzoPedido.getComienzoPedidoView());
                         break;
-                    case 1:
-                        System.out.println("Consulta última tarea.");
-                        break;
-                    case 2:
-                        System.out.println("Cerrar pedido");
-                        break;
                 }
             }catch (NumberFormatException exception) {
                 exception.fillInStackTrace();
@@ -66,10 +59,9 @@ public class TareaSiguiente {
         gridPane.add(sigTarea,0, 1);
         gridPane.add(presEnter, 0, 2);
         gridPane.add(opcion_0, 0, 3);
-        gridPane.add(opcion_2, 0, 4);
-        gridPane.add(entrada, 0 ,5);
-        gridPane.add(btnEntrar, 0, 6);
-        gridPane.add(btnVolver, 0, 6);
+        gridPane.add(entrada, 0 ,4);
+        gridPane.add(btnEntrar, 0, 5);
+        gridPane.add(btnVolver, 0, 5);
 
         return gridPane;
     }
