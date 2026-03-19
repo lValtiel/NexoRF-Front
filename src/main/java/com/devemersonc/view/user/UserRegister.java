@@ -135,7 +135,6 @@ public class UserRegister {
 
                 RegisterUserRequest registerUserRequest = new RegisterUserRequest(createUser, roleRequest);
                 Map<String, String> errors = userController.createUser(registerUserRequest);
-                //userController.createUser(registerUserRequest);
 
                 if(errors != null) {
                     for(Map.Entry<String, String> entry : errors.entrySet()) {
@@ -170,7 +169,7 @@ public class UserRegister {
                 AlertUtils.userSuccessfullyRegistered();
                 modal.close();
             }catch (Exception exception) {
-                exception.printStackTrace();
+                AlertUtils.error409(exception.getMessage());
             }
         });
 

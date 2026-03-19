@@ -4,6 +4,7 @@ import com.devemersonc.controller.ProductController;
 import com.devemersonc.model.CreateUpdateProductDTO;
 import com.devemersonc.model.ProductResponseDTO;
 import com.devemersonc.model.ValidationErrorProductDTO;
+import com.devemersonc.utils.AlertUtils;
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -137,7 +138,7 @@ public class NuevoProducto {
                 tabla.refresh();
                 modal.close();
             }catch (Exception exception){
-                exception.printStackTrace();
+                AlertUtils.error409(exception.getMessage());
             }
         });
 

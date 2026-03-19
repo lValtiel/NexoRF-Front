@@ -5,10 +5,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+import com.devemersonc.utils.AlertUtils;
 
 public class ProductService {
     private static final String BASE_URL = "http://localhost:8080/api/products";
@@ -40,6 +43,9 @@ public class ProductService {
 
         if(response.statusCode() == 400) {
             return gson.fromJson(response.body(), ValidationErrorProductDTO.class);
+        }else if(response.statusCode() == 409) {
+            ErrorDTO error = gson.fromJson(response.body(), ErrorDTO.class);
+            throw new RuntimeException(error.getMessage());
         }
         return null;
     }
@@ -56,17 +62,39 @@ public class ProductService {
 
         if(response.statusCode() == 400) {
             return gson.fromJson(response.body(), ValidationErrorProductDTO.class);
+        }else if(response.statusCode() == 409) {
+            ErrorDTO error = gson.fromJson(response.body(), ErrorDTO.class);
+            throw new RuntimeException(error.getMessage());
         }
         return null;
     }
 
-    //Metodo search producto por sku/name/location
-    public ProductResponseDTO getProductBySku(String data) throws Exception {
-        String url = BASE_URL + "/search?data=" + data;
+    //Metodo search producto por sku
+    public ProductResponseDTO getProductBySku(String sku) throws Exception {
+        String url = BASE_URL + "/searchSku?sku=" + sku;
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("Authorization", "Bearer " + SessionManager.getToken())
+                .GET()
+                .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        if(response.statusCode() == 404 || response.body().isBlank()) {
+            return null;
+        }
+        return gson.fromJson(response.body(), ProductResponseDTO.class);
+    }
+
+    //Metodo search producto por name
+    public ProductResponseDTO loadProductByName(String name) throws Exception {
+        String normalizedName = name.trim().replaceAll("\\s+", " ");
+        String encodedName = URLEncoder.encode(name, StandardCharsets.UTF_8);
+        String url = BASE_URL + "/searchName?name=" + encodedName;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Authorization", "Bearer " + SessionManager.getToken())
+                .header("Accept-Charset", "UTF-8")
                 .GET()
                 .build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -107,5 +135,15 @@ public class ProductService {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         return response.body();
+    }
+
+    //Metodo eliminar producto
+    public void deleteProduct(Long product_id) throws Exception {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/" + product_id))
+                .header("Authorization", "Bearer " + SessionManager.getToken())
+                .DELETE()
+                .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 }

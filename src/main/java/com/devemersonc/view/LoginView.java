@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
@@ -26,6 +28,7 @@ public class LoginView {
 
         Label title = new Label("Inicio de Sesión");
         title.getStyleClass().add("titulo");
+        title.setPadding(new Insets(0,0,30,0));
 
         Label usernameLabel = new Label("Nombre de usuario:");
         TextField usernameField = new TextField();
@@ -70,17 +73,22 @@ public class LoginView {
 
         GridPane.setHalignment(btnLogin, HPos.RIGHT);
 
-        VBox contenedor = new VBox(150);
-        contenedor.setAlignment(Pos.CENTER);
+        Image logoImage = new Image(getClass().getResource("/images/logo.png").toExternalForm());
+        ImageView logoView = new ImageView(logoImage);
+        logoView.setFitWidth(370);
+        logoView.setPreserveRatio(true);
+
+        VBox contenedor = new VBox(30);
+        contenedor.setAlignment(Pos.TOP_CENTER);
         contenedor.getChildren().addAll(title, gridPane);
         contenedor.getStyleClass().add("contenedor");
-        contenedor.setMaxWidth(500);
-        VBox.setMargin(title, new Insets(80, 0, 0,0));
-        VBox.setMargin(gridPane, new Insets(0, 0, 150,0));
+        contenedor.setMaxWidth(400);
+        VBox.setMargin(title, new Insets(60, 20, 0,20));
+        VBox.setMargin(gridPane, new Insets(0, 20, 60,20));
 
         VBox root = new VBox();
-        root.setAlignment(Pos.CENTER);
-        root.getChildren().add(contenedor);
+        root.setAlignment(Pos.TOP_CENTER);
+        root.getChildren().addAll(logoView, contenedor);
 
         Scene scene = new Scene(root, 1250, 720);
         scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());

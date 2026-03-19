@@ -14,6 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
+import java.util.Optional;
+
 public class InventarioView {
     private final ProductController productController = new ProductController();
     private TableView<ProductResponseDTO> tablaProductos;
@@ -86,24 +88,29 @@ public class InventarioView {
             String valor = busquedaField.getText();
 
             try {
-                if (criterio.equals("Todos los productos")) {
-                    if (valor.isBlank()) {
-                        tablaProductos.setItems(FXCollections.observableArrayList(productController.loadAllProducts()));
-                    } else {
-                        AlertUtils.deleteSkuEntered();
-                    }
-                }
-                else {
-                    ProductResponseDTO dto = productController.loadProductBySku(valor);
-
-                    if ((criterio.equals("Nombre") && dto.getName().equalsIgnoreCase(valor)) ||
-                            (criterio.equals("Código") && dto.getSku().equalsIgnoreCase(valor))) {
-
-                        tablaProductos.setItems(FXCollections.observableArrayList(dto));
-                    }
-                }
+               if(criterio.equals("Todos los productos")) {
+                   if(valor.isBlank()) {
+                       tablaProductos.setItems(FXCollections.observableArrayList(productController.loadAllProducts()));
+                   }else {
+                       AlertUtils.deleteSkuEntered();
+                   }
+               } else if (criterio.equals("Código")) {
+                   ProductResponseDTO dto = productController.loadProductBySku(valor);
+                   if(dto != null) {
+                       tablaProductos.setItems(FXCollections.observableArrayList(dto));
+                   }else {
+                       AlertUtils.productNotFound(valor);
+                   }
+               }else if (criterio.equals("Nombre")) {
+                   ProductResponseDTO dto = productController.loadProductByName(valor);
+                   if(dto != null) {
+                       tablaProductos.setItems(FXCollections.observableArrayList(dto));
+                   }else {
+                       AlertUtils.productNotFound(valor);
+                   }
+               }
             } catch (Exception ex) {
-                AlertUtils.productNotFound(valor);
+                AlertUtils.error();
             }
         });
 
@@ -177,6 +184,37 @@ public class InventarioView {
                     NavigationController.getInstance().showFormProductEdit(sel.getId(), dto, tablaProductos);
                 });
 
+
+                btnEliminar.setOnAction(e -> {
+                    ProductResponseDTO selected = getTableView().getItems().get(getIndex());
+
+                    if(selected == null) {
+                        return;
+                    }
+
+
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Confirmación");
+                    alert.setHeaderText("Eliminar producto");
+                    alert.setContentText("¿Seguro que desea eliminar a este usuario?");
+
+                    Optional<ButtonType> result = alert.showAndWait();
+
+                    if(result.isPresent() && result.get() == ButtonType.OK) {
+                        try {
+                            productController.deleteProduct(selected.getId());
+                            tablaProductos.getItems().remove(selected);
+                        }catch (Exception exception) {
+                            exception.printStackTrace();
+
+                            Alert error = new Alert(Alert.AlertType.ERROR);
+                            error.setTitle("Error");
+                            error.setHeaderText("No se pudo eliminar el usuario");
+                            error.setContentText(exception.getMessage());
+                            error.showAndWait();
+                        }
+                    }
+                });
             }
 
             @Override

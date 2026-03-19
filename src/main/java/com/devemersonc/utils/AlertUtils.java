@@ -31,6 +31,13 @@ public class AlertUtils {
         alert.showAndWait();
     }
 
+    public static void enterValueError() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Debe ingresar un valor");
+        alert.showAndWait();
+    }
+
     public static void deleteSkuEntered() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -98,5 +105,12 @@ public class AlertUtils {
         alert.setHeaderText("No se pudo conectar al servidor");
         alert.setContentText("Verifique que el backend esté ejecutándose.");
         alert.show();
+    }
+
+    public static void error409(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

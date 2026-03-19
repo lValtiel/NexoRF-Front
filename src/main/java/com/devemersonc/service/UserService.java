@@ -3,6 +3,8 @@ package com.devemersonc.service;
 import com.devemersonc.model.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import javafx.scene.control.Alert;
+import com.devemersonc.utils.AlertUtils;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -28,6 +30,9 @@ public class UserService {
 
         if(response.statusCode() == 400) {
             return gson.fromJson(response.body(), new TypeToken<Map<String, String>>(){}.getType());
+        }else if(response.statusCode() == 409) {
+            ErrorDTO error = gson.fromJson(response.body(), ErrorDTO.class);
+            throw new RuntimeException(error.getMessage());
         }
         return null;
     }

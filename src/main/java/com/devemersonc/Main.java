@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -24,6 +25,8 @@ public class Main extends Application {
     public void start(Stage stage) {
         NavigationController.getInstance().setStage(stage);
         NavigationController.getInstance().showLogin();
+
+        stage.getIcons().add(new Image(getClass().getResource("/images/icon.png").toExternalForm()));
 
         stage.show();
 

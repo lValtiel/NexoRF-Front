@@ -71,10 +71,6 @@ public class NavigationController {
         }
     }
 
-    public void showUpdateProducto(Producto producto, TableView<Producto> table) {
-        new UpdateProductView().showUpdateModal(producto, table);
-    }
-
     public void showFormProductEdit(Long product_id, CreateUpdateProductDTO dto, TableView<ProductResponseDTO> tabla) {
         new EditProductView(product_id, dto, tabla).showFormEditProduct();
     }

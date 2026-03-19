@@ -15,8 +15,12 @@ public class ProductController {
         return productService.getProducts();
     }
 
-    public ProductResponseDTO loadProductBySku(String data) throws Exception {
-        return productService.getProductBySku(data);
+    public ProductResponseDTO loadProductBySku(String sku) throws Exception {
+        return productService.getProductBySku(sku);
+    }
+
+    public ProductResponseDTO loadProductByName(String name) throws Exception {
+        return productService.loadProductByName(name);
     }
 
     public ValidationErrorProductDTO updateProduct(Long product_id, CreateUpdateProductDTO createUpdateProductDTO) throws Exception{
@@ -41,5 +45,9 @@ public class ProductController {
         }catch (Exception e) {
             return null;
         }
+    }
+
+    public void deleteProduct(Long product_id) throws Exception{
+        productService.deleteProduct(product_id);
     }
 }
